@@ -1,0 +1,29 @@
+.footer {
+  background-color: #fff4f4;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.footer h2 {
+  color: #5c4033;
+  margin-bottom: 10px;
+}
+
+.footer p {
+  color: #7a5a5a;
+  margin: 5px 0;
+}
+
+.footer-contact {
+  margin-top: 15px;
+}
+.footer a {
+  text-decoration: none;
+  color: #ff8fa3;
+  font-weight: 500;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
