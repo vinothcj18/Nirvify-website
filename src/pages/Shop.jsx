@@ -62,7 +62,7 @@ function Shop() {
 >
 
               <img
-                src={product.image}
+                src={product.images[0]}
                 alt={product.name}
               />
 

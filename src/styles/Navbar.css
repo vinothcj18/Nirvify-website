@@ -36,3 +36,12 @@
   }
 
 }
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: #5c4033;
+  font-size: 18px;
+  font-family: inherit;
+}

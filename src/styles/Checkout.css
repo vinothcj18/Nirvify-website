@@ -1,0 +1,29 @@
+.checkout-container {
+  min-height: 80vh;
+  padding: 50px;
+}
+
+.checkout-card {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #ddd;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.payment-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #5c4033;
+  color: white;
+}

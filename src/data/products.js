@@ -1,51 +1,34 @@
 const products = [
   {
     id: 1,
-    name: "Explosion Box",
-    price: "₹499",
-    category: "Gift",
-    image: "https://via.placeholder.com/250",
-  },
 
-  {
-    id: 2,
-    name: "Paper Flower Bouquet",
-    price: "₹299",
-    category: "Decoration",
-    image: "https://via.placeholder.com/250",
-  },
+    name: "Heat Erasable Fabric Marking Pens",
 
-  {
-    id: 3,
-    name: "Customized Scrapbook",
-    price: "₹699",
-    category: "Gift",
-    image: "https://via.placeholder.com/250",
-  },
+    price: 249,
 
-  {
-    id: 4,
-    name: "Birthday Craft Box",
-    price: "₹399",
-    category: "Birthday",
-    image: "https://via.placeholder.com/250",
-  },
+    category: "Craft Materials",
 
-  {
-    id: 5,
-    name: "Greeting Card",
-    price: "₹199",
-    category: "Card",
-    image: "https://via.placeholder.com/250",
-  },
+    images: [
+      "/images/heat-erasable/51lGN6O5ZTL._SL1081_.jpg",
+      "/images/heat-erasable/71+5HWNY7gL._SL1500_.jpg",
+      "/images/heat-erasable/71lnnoZt9TL._SL1500_.jpg",
+      "/images/heat-erasable/71p5Wje+5iL._SL1500_.jpg",
+      "/images/heat-erasable/71XokK6Nc4L._SL1500_.jpg",
+      "/images/heat-erasable/71Zd4r5+rKL._SL1500_.jpg",
+      "/images/heat-erasable/91iBJstikmL._SL1500_.jpg"
+    ],
 
-  {
-    id: 6,
-    name: "Wedding Decoration",
-    price: "₹999",
-    category: "Wedding",
-    image: "https://via.placeholder.com/250",
-  },
+    averageRating: 4.2,
+
+    reviewCount: 124,
+
+    description: [
+      "Perfect for sewing and embroidery",
+      "Heat erasable ink",
+      "Safe on most fabrics",
+      "Fine tip for precision"
+    ]
+  }
 ];
 
 export default products;
