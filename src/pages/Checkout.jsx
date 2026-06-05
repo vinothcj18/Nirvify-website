@@ -9,20 +9,27 @@ import Footer from "../components/Footer";
 import "../styles/Checkout.css";
 
 function Checkout() {
-
+const buyNowProduct = JSON.parse(
+  localStorage.getItem("buyNowProduct")
+);
   const navigate = useNavigate();
 
-  const { cartItems } = useContext(CartContext);
+ const { cartItems } = useContext(CartContext);
+
+const checkoutItems =
+  buyNowProduct
+    ? [buyNowProduct]
+    : cartItems;
 
   const user = JSON.parse(
     localStorage.getItem("user")
   );
 
-  const totalAmount = cartItems.reduce(
-    (total, item) =>
-      total + item.price * item.quantity,
-    0
-  );
+  const totalAmount = checkoutItems.reduce(
+  (total, item) =>
+    total + item.price * item.quantity,
+  0
+);
 
   return (
     <div>
@@ -37,7 +44,7 @@ function Checkout() {
 
           <h2>Order Summary</h2>
 
-          {cartItems.map((item) => (
+          {checkoutItems.map((item) => (
 
             <div
               key={item.id}

@@ -57,16 +57,17 @@ navigate("/");
       <Navbar />
         
       <div className="profile-container">
-<button
+
+
+        <h1>My Profile</h1>
+
+        <div className="profile-card">
+          <button
   className="close-btn"
   onClick={() => navigate("/")}
 >
   ✕
 </button>
-
-        <h1>My Profile</h1>
-
-        <div className="profile-card">
 
   <p>
     <strong>Name:</strong>{" "}

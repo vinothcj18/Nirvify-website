@@ -10,6 +10,7 @@ function Signup() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 const navigate = useNavigate();
+const [showPassword, setShowPassword] =useState(false);
   const handleSignup = async (e) => {
 
     e.preventDefault();
@@ -91,7 +92,7 @@ navigate("/");
         />
 
         <input
-          type="password"
+          type={showPassword? "text": "password"}
           placeholder="Password"
           value={password}
           onChange={(e) =>
@@ -100,9 +101,34 @@ navigate("/");
           required
         />
 
-        <button type="submit">
-          Signup
-        </button>
+        <label className="show-password">
+
+  <input
+    type="checkbox"
+    checked={showPassword}
+    onChange={() =>
+      setShowPassword(
+        !showPassword
+      )
+    }
+  />
+
+  Show Password
+
+</label>
+
+        <button
+  className="auth-btn"
+>
+  Sign Up
+</button>
+
+<button
+  className="close-btn"
+  onClick={() => navigate("/")}
+>
+  ✕
+</button>
 
       </form>
 

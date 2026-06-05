@@ -8,7 +8,8 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
-
+import AdminOrders from "./pages/AdminOrders";
+import MyOrders from "./pages/MyOrders";
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +23,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<Checkout />}/>
         <Route path="/payment" element={<Payment />}/>
+        <Route path="/admin/orders"element={<AdminOrders />}/>
+        <Route path="/my-orders"element={<MyOrders />}/>
       </Routes>
     </BrowserRouter>
   );

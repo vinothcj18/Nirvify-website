@@ -8,7 +8,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -70,18 +70,46 @@ function Login() {
         />
 
         <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
-          required
-        />
+  type={
+    showPassword
+      ? "text"
+      : "password"
+  }
+  placeholder="Password"
+  value={password}
+  onChange={(e) =>
+    setPassword(e.target.value)
+  }
+/>
 
-        <button type="submit">
-          Login
-        </button>
+<label className="show-password">
+
+  <input
+    type="checkbox"
+    checked={showPassword}
+    onChange={() =>
+      setShowPassword(
+        !showPassword
+      )
+    }
+  />
+
+  Show Password
+
+</label>
+
+       <button
+  className="auth-btn"
+>
+  Login
+</button>
+
+<button
+  className="close-btn"
+  onClick={() => navigate("/")}
+>
+  ✕
+</button>
 
       </form>
 

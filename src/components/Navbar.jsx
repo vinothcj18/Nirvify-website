@@ -13,6 +13,7 @@ function Navbar() {
     localStorage.getItem("user")
   );
 
+  
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
@@ -35,44 +36,59 @@ function Navbar() {
 
       <div className="nav-links">
 
-        <Link to="/">Home</Link>
+  <Link to="/">Home</Link>
 
-        <Link to="/shop">Shop</Link>
+  <Link to="/shop">Shop</Link>
 
-        <Link to="/cart">
-          Cart ({totalItems})
-        </Link>
+  {user && (
+    <Link to="/my-orders">
+      My Orders
+    </Link>
+  )}
 
-        {user ? (
-          <>
+  {user?.role === "admin" && (
+    <Link to="/admin/orders">
+      Admin Orders
+    </Link>
+  )}
 
-           <Link to="/profile">
-  Hello, {user.name}
-</Link>
+  {!user ? (
 
-            <button
-              className="logout-btn"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
+  <>
+    <Link to="/login">
+      Login
+    </Link>
 
-          </>
-        ) : (
-          <>
+    <Link to="/signup">
+      Sign Up
+    </Link>
+  </>
 
-            <Link to="/login">
-              Login
-            </Link>
+) : (
 
-            <Link to="/signup">
-              Signup
-            </Link>
+  <>
+    <Link to="/profile">
+      Profile
+    </Link>
 
-          </>
-        )}
+    <button
+      className="logout-btn"
+      onClick={() => {
 
-      </div>
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+
+        window.location.href = "/";
+
+      }}
+    >
+      Logout
+    </button>
+  </>
+
+)}
+
+</div>
 
     </nav>
   );

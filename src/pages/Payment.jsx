@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
@@ -11,9 +11,31 @@ function Payment() {
 const navigate = useNavigate();
   const [paymentProof, setPaymentProof] = useState(null);
 const [showSuccess, setShowSuccess] = useState(false);
-const { clearCart } = useContext(CartContext);
 
- const handleSubmit = () => {
+const { cartItems, clearCart } =
+  useContext(CartContext);
+const buyNowProduct = JSON.parse(
+  localStorage.getItem("buyNowProduct")
+);
+
+const orderItems =
+  buyNowProduct
+    ? [buyNowProduct]
+    : cartItems;
+
+const user = JSON.parse(
+  localStorage.getItem("user")
+);
+
+
+
+const totalAmount = orderItems?.reduce(
+  (total, item) =>
+    total + item.price * item.quantity,
+  0
+) || 0;
+
+ const handleSubmit = async () => {
 
   if (!paymentProof) {
 
@@ -22,10 +44,62 @@ const { clearCart } = useContext(CartContext);
     );
 
     return;
-
   }
 
-  setShowSuccess(true);
+  try {
+
+    const formData = new FormData();
+
+    formData.append(
+      "customerName",
+      user.name
+    );
+
+    formData.append(
+      "email",
+      user.email
+    );
+
+    formData.append(
+      "phone",
+      user.phone
+    );
+
+    formData.append(
+      "address",
+      user.address
+    );
+
+    formData.append(
+      "products",
+      JSON.stringify(orderItems)
+    );
+
+    formData.append(
+      "totalAmount",
+      totalAmount
+    );
+
+    formData.append(
+      "paymentScreenshot",
+      paymentProof
+    );
+
+    await axios.post(
+      "http://localhost:5000/api/orders",
+      formData
+    );
+
+    setShowSuccess(true);
+
+  } catch (error) {
+
+    alert(
+      error.response?.data?.message ||
+      "Order submission failed"
+    );
+
+  }
 
 };
 
@@ -91,7 +165,12 @@ const { clearCart } = useContext(CartContext);
       <button
             onClick={() => {
             clearCart();
-            navigate("/");}}
+
+localStorage.removeItem(
+  "buyNowProduct"
+);
+
+navigate("/");}}
             >Done
         </button>
 

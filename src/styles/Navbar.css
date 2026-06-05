@@ -45,3 +45,14 @@
   font-size: 18px;
   font-family: inherit;
 }
+.logout-btn {
+  border: none;
+  background: none;
+
+  cursor: pointer;
+
+  font-size: 18px;
+  font-family: inherit;
+
+  color: #6b4a3a;
+}

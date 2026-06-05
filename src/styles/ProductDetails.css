@@ -71,7 +71,7 @@
 }
 
 .cart-btn {
-  background-color: #ffb6b6;
+  background-color: #5c4033;
   color: white;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .cart-btn:hover {
-  background-color: #ff8fa3;
+  opacity: 0.9;
 }
 
 .buy-btn:hover {

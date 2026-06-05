@@ -26,12 +26,18 @@ const registerUser = async (req, res) => {
     const hashedPassword =
       await bcrypt.hash(password, 10);
 
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      phone,
-    });
+   const role =
+  email === "yasodhap0202@gmail.com"
+    ? "admin"
+    : "user";
+
+const user = await User.create({
+  name,
+  email,
+  password: hashedPassword,
+  phone,
+  role,
+});
 
     const token = jwt.sign(
       {

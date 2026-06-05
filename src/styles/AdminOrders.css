@@ -1,0 +1,75 @@
+.admin-orders {
+
+  padding: 40px;
+
+  min-height: 80vh;
+}
+
+.admin-orders h1 {
+
+  text-align: center;
+
+  margin-bottom: 30px;
+}
+
+.order-card {
+
+  background: white;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 4px 12px
+    rgba(0,0,0,0.1);
+}
+
+.status-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.approve-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.delivered-btn {
+  background-color: #2196f3;
+  color: white;
+  margin-left: 10px;
+}
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  margin-left: 10px;
+}
+.screenshot-btn {
+  display: inline-block;
+
+  margin-top: 12px;
+
+  padding: 10px 18px;
+
+  background-color: #6b4a3a;
+
+  color: white;
+  text-decoration: none;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  transition: 0.3s ease;
+}
+
+.screenshot-btn:hover {
+  transform: translateY(-2px);
+}

@@ -13,14 +13,74 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  position: relative;
 }
 
 .auth-form input {
   padding: 12px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;   /* Increased */
+
+  color: #6b4a3a;
+
+  border: 1px solid #999;
+  border-radius: 6px;
 }
 
-.auth-form button {
-  padding: 12px;
+.auth-form input::placeholder {
+  color: #8a7568;
+  font-weight: 600;   /* Increased */
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 14px;
   border: none;
+  border-radius: 8px;
+
+  background: #6b4a3a;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
   cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+}
+
+.close-btn {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+
+  border: none;
+  background: none;
+
+  font-size: 24px;
+  cursor: pointer;
+
+  color: #6b4a3a;
+}
+.show-password {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 14px;
+  color: #6b4a3a;
+
+  cursor: pointer;
+}
+
+.show-password input {
+  width: auto;
 }

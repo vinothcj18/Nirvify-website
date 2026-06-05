@@ -3,14 +3,14 @@ import { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+import { useNavigate } from "react-router-dom";
 import "../styles/ProductDetails.css";
 
 import products from "../data/products";
 
 function ProductDetails() {
   const { id } = useParams();
-
+const navigate = useNavigate();
   const product = products.find(
     (item) => item.id === Number(id)
   );
@@ -121,9 +121,24 @@ const { addToCart } = useContext(CartContext);
   Add To Cart
 </button>
 
-            <button className="buy-btn">
-              Buy Now
-            </button>
+            <button
+  className="buy-btn"
+  onClick={() => {
+
+    localStorage.setItem(
+      "buyNowProduct",
+      JSON.stringify({
+        ...product,
+        quantity,
+      })
+    );
+
+    navigate("/checkout");
+
+  }}
+>
+  Buy Now
+</button>
 
           </div>
 
