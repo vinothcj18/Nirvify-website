@@ -3,14 +3,43 @@ import Footer from "../components/Footer";
 
 import "../styles/Shop.css";
 
-import { useState } from "react";
-import products from "../data/products";
+import { useState,useEffect } from "react";
+
 
 function Shop() {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const filteredProducts = products.filter((product) => {
+    const [products, setProducts] =useState([]);
+    useEffect(() => {
 
+  fetchProducts();
+
+}, []);
+
+const fetchProducts =
+  async () => {
+
+    try {
+
+      const response =
+        await fetch(
+          "http://localhost:5000/api/products"
+        );
+
+      const data =
+        await response.json();
+
+      setProducts(data);
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+    const filteredProducts = products.filter((product) => {
+    
   const matchesSearch =
     product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -43,11 +72,7 @@ function Shop() {
   value={selectedCategory}
   onChange={(e) => setSelectedCategory(e.target.value)}
 >
-  <option>All</option>
-  <option>Gift</option>
-  <option>Decoration</option>
-  <option>Birthday</option>
-  <option>Wedding</option>
+  <option>Craft Materials</option>
 </select>
 
         </div>
@@ -57,8 +82,8 @@ function Shop() {
           {filteredProducts.map((product) => (
             <div
   className="shop-card"
-  key={product.id}
-  onClick={() => window.location.href = `/product/${product.id}`}
+  key={product._id}
+  onClick={() => window.location.href = `/product/${product._id}`}
 >
 
               <img

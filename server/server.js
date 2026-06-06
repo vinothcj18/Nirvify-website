@@ -16,6 +16,7 @@ app.use("/uploads",express.static("uploads"));
 app.use( "/api/orders",orderRoutes);
 app.use("/api/products", productRoutes);
 app.use( "/api/auth",authRoutes);
+
 app.get("/", (req, res) => {
   res.send("Nirvify Backend Running");
 });
