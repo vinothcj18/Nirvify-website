@@ -105,9 +105,36 @@ const updateProduct = async (
   }
 
 };
+const getProductById = async (
+  req,
+  res
+) => {
+
+  try {
+
+    const product =
+      await Product.findById(
+        req.params.id
+      );
+
+    res.status(200).json(
+      product
+    );
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message,
+    });
+
+  }
+
+};
+
 module.exports = {
   getProducts,
   createProduct,
   deleteProduct,
   updateProduct,
+  getProductById,
 };
