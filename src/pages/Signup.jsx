@@ -18,7 +18,7 @@ const [showPassword, setShowPassword] =useState(false);
     try {
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://nirvify-backend.onrender.com/api/auth/register",
         {
           name,
           email,

@@ -43,7 +43,7 @@ function AdminOrders() {
 
       const response =
         await axios.get(
-          "http://localhost:5000/api/orders"
+          "https://nirvify-backend.onrender.com/api/orders"
         );
 
       setOrders(response.data);
@@ -64,7 +64,7 @@ const updateStatus = async (
   try {
 
     await axios.put(
-      `http://localhost:5000/api/orders/${id}`,
+      "https://nirvify-backend.onrender.com/api/orders/${id}",
       {
         status,
       }
@@ -216,7 +216,7 @@ const updateStatus = async (
 </div>
 
     <a
-  href={`http://localhost:5000/uploads/${order.paymentScreenshot}`}
+  href={`https://nirvify-backend.onrender.com/uploads/${order.paymentScreenshot}`}
   target="_blank"
   rel="noreferrer"
   className="screenshot-btn"

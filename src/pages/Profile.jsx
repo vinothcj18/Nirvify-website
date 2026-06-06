@@ -23,7 +23,7 @@ const handleSave = async () => {
   try {
 
     const response = await axios.put(
-      "http://localhost:5000/api/auth/profile",
+      "https://nirvify-backend.onrender.com/api/auth/profile",
       {
         email: user.email,
         phone,

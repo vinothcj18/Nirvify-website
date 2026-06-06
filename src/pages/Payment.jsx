@@ -86,7 +86,7 @@ const totalAmount = orderItems?.reduce(
     );
 
     await axios.post(
-      "http://localhost:5000/api/orders",
+      "https://nirvify-backend.onrender.com/api/orders",
       formData
     );
 

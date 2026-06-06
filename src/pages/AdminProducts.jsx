@@ -36,7 +36,7 @@ const fetchProducts =
 
       const response =
         await axios.get(
-          "http://localhost:5000/api/products"
+          "https://nirvify-backend.onrender.com/api/products"
         );
 
       setProducts(
@@ -70,7 +70,7 @@ const deleteProduct = async (
   try {
 
     await axios.delete(
-      `http://localhost:5000/api/products/${id}`
+      `https://nirvify-backend.onrender.com/api/products/${id}`
     );
 
     fetchProducts();
@@ -121,7 +121,7 @@ const editProduct = (
        if (editingId) {
 
   await axios.put(
-    `http://localhost:5000/api/products/${editingId}`,
+    `https://nirvify-backend.onrender.com/api/products/${editingId}`,
     {
       name:
         formData.name,
@@ -150,7 +150,7 @@ const editProduct = (
 } else {
 
   await axios.post(
-    "http://localhost:5000/api/products",
+    "https://nirvify-backend.onrender.com/api/products",
     {
       name:
         formData.name,

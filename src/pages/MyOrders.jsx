@@ -42,7 +42,7 @@ if (!user) {
 
       const response =
         await axios.get(
-          `http://localhost:5000/api/orders/user/${user.email}`
+          `https://nirvify-backend.onrender.com/api/orders/user/${user.email}`
         );
 
       setOrders(response.data);
