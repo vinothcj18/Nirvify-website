@@ -1,24 +1,57 @@
 import { useParams } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import "../styles/ProductDetails.css";
 
-import products from "../data/products";
+
 
 function ProductDetails() {
   const { id } = useParams();
 const navigate = useNavigate();
-  const product = products.find(
-    (item) => item.id === Number(id)
-  );
-  const [selectedImage, setSelectedImage] = useState(
-  product?.images?.[0]
-);
+useEffect(() => {
+
+  fetchProduct();
+
+}, [id]);
+
+const fetchProduct =
+  async () => {
+
+    try {
+
+      const response =
+        await fetch(
+          `http://localhost:5000/api/products/${id}`
+        );
+
+      const data =
+        await response.json();
+
+      setProduct(data);
+
+      setSelectedImage(
+        data.images?.[0]
+      );
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+  const [product, setProduct] =
+  useState(null);
+  const [selectedImage,
+  setSelectedImage] =
+  useState("");
 const [quantity, setQuantity] = useState(1);
 const { addToCart } = useContext(CartContext);
+console.log("Product:", product);
+console.log("ID:", id);
   if (!product) {
     return (
       <div>
