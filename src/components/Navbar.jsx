@@ -40,17 +40,23 @@ function Navbar() {
 
   <Link to="/shop">Shop</Link>
 
-  {user && (
-    <Link to="/my-orders">
-      My Orders
-    </Link>
-  )}
+ {user?.role !== "admin" && (
+  <Link to="/my-orders">
+    My Orders
+  </Link>
+)}
 
   {user?.role === "admin" && (
-    <Link to="/admin/orders">
+  <>
+    <Link to="/admin-orders">
       Admin Orders
     </Link>
-  )}
+
+    <Link to="/admin-products">
+      Admin Products
+    </Link>
+  </>
+)}
 
   {!user ? (
 
