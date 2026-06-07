@@ -26,13 +26,13 @@ export function CartProvider({ children }) {
   const addToCart = (product, quantity) => {
     
     const existingItem = cartItems.find(
-      (item) => item.id === product.id
+      (item) => item._id === product._id
     );
 
     if (existingItem) {
 
       const updatedCart = cartItems.map((item) =>
-        item.id === product.id
+        item._id === product._id
           ? {
               ...item,
               quantity: item.quantity + quantity,
@@ -59,7 +59,7 @@ export function CartProvider({ children }) {
   const removeFromCart = (id) => {
 
   const updatedCart = cartItems.filter(
-    (item) => item.id !== id
+    (item) => item._id !== id
   );
 
   setCartItems(updatedCart);
