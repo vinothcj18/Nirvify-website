@@ -25,9 +25,9 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<Checkout />}/>
         <Route path="/payment" element={<Payment />}/>
-        <Route path="/admin/orders"element={<AdminOrders />}/>
+        <Route path="/admin-orders"element={<AdminOrders />}/>
         <Route path="/my-orders"element={<MyOrders />}/>
-        <Route path="/admin/products"element={<AdminProducts />}/>
+        <Route path="/admin-products"element={<AdminProducts />}/>
 
       </Routes>
     </BrowserRouter>
