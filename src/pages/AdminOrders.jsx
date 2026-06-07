@@ -150,6 +150,12 @@ const updateStatus = async (
       Status:
       {order.orderStatus}
     </p>
+    <p>
+  Order Date:{" "}
+  {new Date(
+    order.createdAt
+  ).toLocaleDateString("en-IN")}
+</p>
 
 <div style={{ marginTop: "10px" }}>
 

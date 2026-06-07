@@ -23,6 +23,11 @@ const productSchema =
           type: String,
         },
       ],
+      colors: [
+  {
+    type: String,
+  },
+],
 
       averageRating: {
         type: Number,
@@ -45,6 +50,8 @@ const productSchema =
     }
   );
 
+
+  
 module.exports =
   mongoose.model(
     "Product",

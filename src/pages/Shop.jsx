@@ -51,6 +51,14 @@ const fetchProducts =
 
 });
 
+const categories = [
+  ...new Set(
+    products.map(
+      (product) => product.category
+    )
+  ),
+];
+
   return (
     <div>
       <Navbar />
@@ -72,7 +80,22 @@ const fetchProducts =
   value={selectedCategory}
   onChange={(e) => setSelectedCategory(e.target.value)}
 >
-  <option>Craft Materials</option>
+  <option value="">
+    All Categories
+  </option>
+
+  {categories.map(
+    (category) => (
+
+      <option
+        key={category}
+        value={category}
+      >
+        {category}
+      </option>
+
+    )
+  )}
 </select>
 
         </div>

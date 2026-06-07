@@ -1,86 +1,160 @@
-import { createContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+} from "react";
 
-export const CartContext = createContext();
+export const CartContext =
+  createContext();
 
-export function CartProvider({ children }) {
+export function CartProvider({
+  children,
+}) {
 
-  const [cartItems, setCartItems] = useState(() => {
+  const [cartItems,
+  setCartItems] =
+    useState(() => {
 
-    const savedCart = localStorage.getItem("cart");
+      const savedCart =
+        localStorage.getItem(
+          "cart"
+        );
 
-    return savedCart
-      ? JSON.parse(savedCart)
-      : [];
+      return savedCart
+        ? JSON.parse(
+            savedCart
+          )
+        : [];
 
-  });
+    });
 
   useEffect(() => {
 
+    console.log(
+      "CART ITEMS:",
+      cartItems
+    );
+
     localStorage.setItem(
       "cart",
-      JSON.stringify(cartItems)
+      JSON.stringify(
+        cartItems
+      )
     );
 
   }, [cartItems]);
 
-  const addToCart = (product, quantity) => {
-    
-    const existingItem = cartItems.find(
-      (item) => item._id === product._id
+  const addToCart = (
+    product,
+    quantity
+  ) => {
+
+    console.log(
+      "INSIDE ADD TO CART"
+    );
+
+    console.log(
+      "PRODUCT:",
+      product
+    );
+
+    console.log(
+      "QUANTITY:",
+      quantity
+    );
+
+    const existingItem =
+      cartItems.find(
+        (item) =>
+          item._id ===
+          product._id
+      );
+
+    console.log(
+      "EXISTING ITEM:",
+      existingItem
     );
 
     if (existingItem) {
 
-      const updatedCart = cartItems.map((item) =>
-        item._id === product._id
-          ? {
-              ...item,
-              quantity: item.quantity + quantity,
-            }
-          : item
+      const updatedCart =
+        cartItems.map(
+          (item) =>
+            item._id ===
+            product._id
+              ? {
+                  ...item,
+                  quantity:
+                    item.quantity +
+                    quantity,
+                }
+              : item
+        );
+
+      console.log(
+        "UPDATED CART:",
+        updatedCart
       );
 
-      setCartItems(updatedCart);
+      setCartItems(
+        updatedCart
+      );
 
     } else {
 
-      setCartItems([
+      const newCart = [
         ...cartItems,
         {
           ...product,
           quantity,
         },
-      ]);
+      ];
+
+      console.log(
+        "NEW CART:",
+        newCart
+      );
+
+      setCartItems(
+        newCart
+      );
 
     }
 
   };
-  
-  const removeFromCart = (id) => {
 
-  const updatedCart = cartItems.filter(
-    (item) => item._id !== id
-  );
+  const removeFromCart =
+    (id) => {
 
-  setCartItems(updatedCart);
+      const updatedCart =
+        cartItems.filter(
+          (item) =>
+            item._id !== id
+        );
 
-};
-const clearCart = () => {
+      setCartItems(
+        updatedCart
+      );
 
-  setCartItems([]);
+    };
 
-};
+  const clearCart = () => {
+
+    setCartItems([]);
+
+  };
 
   return (
     <CartContext.Provider
       value={{
-  cartItems,
-  addToCart,
-  removeFromCart,
-  clearCart,
-}}
+        cartItems,
+        addToCart,
+        removeFromCart,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
+
 }

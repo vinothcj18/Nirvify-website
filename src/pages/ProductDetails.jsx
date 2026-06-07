@@ -108,6 +108,33 @@ console.log("ID:", id);
             Category: {product.category}
           </p>
 
+          {product.colors?.length > 0 && (
+
+  <div className="color-section">
+
+    <h4>Available Colors:</h4>
+
+    <div className="color-list">
+
+      {product.colors.map(
+        (color, index) => (
+
+          <span
+            key={index}
+            className="color-tag"
+          >
+            {color}
+          </span>
+
+        )
+      )}
+
+    </div>
+
+  </div>
+
+)}
+
           <p className="rating">
             {product.averageRating > 0
               ? `⭐ ${product.averageRating} (${product.reviewCount} Reviews)`
@@ -147,9 +174,11 @@ console.log("ID:", id);
 
             <button
   className="cart-btn"
-  onClick={() =>
-    addToCart(product, quantity)
-  }
+  onClick={() => {
+  console.log("ADD TO CART CLICKED");
+  console.log(product);
+  addToCart(product, quantity);
+}}
 >
   Add To Cart
 </button>

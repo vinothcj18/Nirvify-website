@@ -19,15 +19,7 @@ function Navbar() {
     0
   );
 
-  const handleLogout = () => {
-
-    localStorage.removeItem("token");
-
-    localStorage.removeItem("user");
-
-    window.location.reload();
-
-  };
+  
 
   return (
     <nav className="navbar">
@@ -45,6 +37,10 @@ function Navbar() {
     My Orders
   </Link>
 )}
+
+<Link to="/cart">
+  Cart ({totalItems})
+</Link>
 
   {user?.role === "admin" && (
   <>

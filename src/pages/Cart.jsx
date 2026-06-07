@@ -36,7 +36,7 @@ const navigate = useNavigate();
             {cartItems.map((item) => (
 
               <div
-                key={item.id}
+                key={item._id}
                 className="cart-item"
               >
 
@@ -62,7 +62,7 @@ const navigate = useNavigate();
                   <button
                     className="remove-btn"
                     onClick={() =>
-                    removeFromCart(item.id)
+                    removeFromCart(item._id)
   }
 >
   Remove

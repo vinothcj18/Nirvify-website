@@ -104,7 +104,12 @@ if (!user) {
                 Status:
                 {order.orderStatus}
               </p>
-
+              <p>
+  Order Date:{" "}
+  {new Date(
+    order.createdAt
+  ).toLocaleDateString("en-IN")}
+</p>
             </div>
 
           ))

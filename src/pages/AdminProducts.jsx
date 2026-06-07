@@ -10,13 +10,15 @@ function AdminProducts() {
   useState([]);
   const [editingId, setEditingId] =
   useState(null);
-
+const [message, setMessage] =
+  useState("");
 const [formData, setFormData] =
   useState({
       name: "",
       price: "",
       category: "",
       image: "",
+      colors: "",
       description: "",
     });
 
@@ -91,24 +93,26 @@ const editProduct = (
   );
 
   setFormData({
-    name:
-      product.name,
+  name:
+    product.name,
 
-    price:
-      product.price,
+  price:
+    product.price,
 
-    category:
-      product.category,
+  category:
+    product.category,
 
-    
-      image:
-  product.images?.join(", ") || "",
+  image:
+    product.images?.join(", ") || "",
 
-    description:
-      product.description.join(
-        ", "
-      ),
-  });
+  colors:
+    product.colors?.join(", ") || "",
+
+  description:
+    product.description.join(
+      "| "
+    ),
+});
 
 };
 
@@ -141,10 +145,18 @@ const editProduct = (
     .map((img) =>
       img.trim()
     ),
+    colors:
+  formData.colors
+    ? formData.colors
+        .split(",")
+        .map((color) =>
+          color.trim()
+        )
+    : [],
 
       description:
         formData.description
-          .split(",")
+          .split("|")
           .map((item) =>
             item.trim()
           ),
@@ -173,10 +185,17 @@ const editProduct = (
     .map((img) =>
       img.trim()
     ),
-
+colors:
+  formData.colors
+    ? formData.colors
+        .split(",")
+        .map((color) =>
+          color.trim()
+        )
+    : [],
       description:
         formData.description
-          .split(",")
+          .split("|")
           .map((item) =>
             item.trim()
           ),
@@ -185,9 +204,15 @@ const editProduct = (
 
 }
 
-        alert(
-          "Product Added Successfully"
-        );
+        setMessage(
+  editingId
+    ? "Product Updated Successfully"
+    : "Product Added Successfully"
+);
+
+setTimeout(() => {
+  setMessage("");
+}, 3000);
         fetchProducts();
         setEditingId(null);
         setFormData({
@@ -195,6 +220,7 @@ const editProduct = (
           price: "",
           category: "",
           image: "",
+          colors:"",
           description: "",
         });
 
@@ -214,6 +240,11 @@ const editProduct = (
     <div>
 
       <Navbar />
+      {message && (
+  <div className="toast-message">
+    {message}
+  </div>
+)}
 
      <div className="admin-products-container">
 
@@ -288,11 +319,24 @@ const editProduct = (
 
           <br />
           <br />
+        <input
+  type="text"
+  name="colors"
+  placeholder="Available Colors (Optional) - Red, Blue, Green"
+  value={
+    formData.colors
+  }
+  onChange={
+    handleChange
+  }
+/>
 
+<br />
+<br />
           <textarea
             rows="5"
             name="description"
-            placeholder="Description points separated by commas"
+            placeholder="Enter description points separated by |"
             value={
               formData.description
             }
@@ -336,83 +380,76 @@ const editProduct = (
 
 ) : (
 
-  products.map(
-    (product) => (
+  <div className="products-grid">
 
-      <div
-  key={product._id}
-  className="product-card"
->
+    {products.map(
+      (product) => (
 
-        <h3>
-          {product.name}
-        </h3>
+        <div
+          key={product._id}
+          className="product-card"
+        >
 
-        <p>
-          ₹{product.price}
-        </p>
+          <h3>
+            {product.name}
+          </h3>
 
-        <p>
-  {product.category}
-</p>
+          <p>
+            ₹{product.price}
+          </p>
 
-<div className="product-actions">
+          <p>
+            {product.category}
+          </p>
 
-  <button
-    onClick={() =>
-      editProduct(
-        product
+          <div className="product-actions">
+
+            <button
+              onClick={() =>
+                editProduct(product)
+              }
+              style={{
+                background: "#ffc107",
+                color: "black",
+                border: "none",
+                padding: "8px 14px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                marginRight: "10px",
+              }}
+            >
+              Edit Product
+            </button>
+
+            <button
+              onClick={() =>
+                deleteProduct(
+                  product._id
+                )
+              }
+              style={{
+                background: "#dc3545",
+                color: "white",
+                border: "none",
+                padding: "8px 14px",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              Delete Product
+            </button>
+
+          </div>
+
+        </div>
+
       )
-    }
-    style={{
-      background:
-        "#ffc107",
-      color: "black",
-      border: "none",
-      padding:
-        "8px 14px",
-      borderRadius:
-        "6px",
-      cursor: "pointer",
-      marginRight:
-        "10px",
-    }}
-  >
-    Edit Product
-  </button>
+    )}
 
-  <button
-    onClick={() =>
-      deleteProduct(
-        product._id
-      )
-    }
-    style={{
-      background:
-        "#dc3545",
-      color: "white",
-      border: "none",
-      padding:
-        "8px 14px",
-      borderRadius:
-        "6px",
-      cursor: "pointer",
-    }}
-  >
-    Delete Product
-  </button>
-
-</div>
-
-      </div>
-
-    )
-  )
+  </div>
 
 )}
-
 </div>
-
 <Footer />
 
     </div>
