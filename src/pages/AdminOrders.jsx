@@ -64,7 +64,7 @@ const updateStatus = async (
   try {
 
     await axios.put(
-      "https://nirvify-backend.onrender.com/api/orders/${id}",
+      `https://nirvify-backend.onrender.com/api/orders/${id}`,
       {
         status,
       }
