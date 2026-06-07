@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
-
+import "../styles/AdminProducts.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -100,8 +100,9 @@ const editProduct = (
     category:
       product.category,
 
-    image:
-      product.images?.[0] || "",
+    
+      image:
+  product.images?.join(", ") || "",
 
     description:
       product.description.join(
@@ -134,9 +135,12 @@ const editProduct = (
       category:
         formData.category,
 
-      images: [
-        formData.image,
-      ],
+      images:
+  formData.image
+    .split(",")
+    .map((img) =>
+      img.trim()
+    ),
 
       description:
         formData.description
@@ -163,9 +167,12 @@ const editProduct = (
       category:
         formData.category,
 
-      images: [
-        formData.image,
-      ],
+      images:
+  formData.image
+    .split(",")
+    .map((img) =>
+      img.trim()
+    ),
 
       description:
         formData.description
@@ -208,22 +215,19 @@ const editProduct = (
 
       <Navbar />
 
-      <div
-        style={{
-          maxWidth: "600px",
-          margin: "40px auto",
-        }}
-      >
+     <div className="admin-products-container">
 
-        <h1>
-          Add Product
-        </h1>
+        <div className="admin-products-card">
 
+<h1 className="admin-products-title">
+  {editingId
+    ? "Update Product"
+    : "Add Product"}
+</h1>
         <form
-          onSubmit={
-            handleSubmit
-          }
-        >
+  className="admin-products-form"
+  onSubmit={handleSubmit}
+>
 
           <input
             type="text"
@@ -273,7 +277,7 @@ const editProduct = (
           <input
             type="text"
             name="image"
-            placeholder="Image Path"
+           placeholder="Enter image paths separated by commas"
             value={
               formData.image
             }
@@ -300,8 +304,9 @@ const editProduct = (
           <br />
           <br />
 
-         <button
+        <button
   type="submit"
+  className="product-submit-btn"
 >
   {
     editingId
@@ -311,6 +316,7 @@ const editProduct = (
 </button>
 
         </form>
+        </div>
 
 <hr
   style={{
@@ -318,7 +324,7 @@ const editProduct = (
   }}
 />
 
-<h2>
+<h2 className="product-list-title">
   Existing Products
 </h2>
 
@@ -334,18 +340,9 @@ const editProduct = (
     (product) => (
 
       <div
-        key={product._id}
-        style={{
-          padding: "15px",
-          marginTop: "10px",
-          border:
-            "1px solid #ddd",
-          borderRadius:
-            "8px",
-          background:
-            "#fff",
-        }}
-      >
+  key={product._id}
+  className="product-card"
+>
 
         <h3>
           {product.name}
@@ -359,11 +356,7 @@ const editProduct = (
   {product.category}
 </p>
 
-<div
-  style={{
-    marginTop: "10px",
-  }}
->
+<div className="product-actions">
 
   <button
     onClick={() =>
