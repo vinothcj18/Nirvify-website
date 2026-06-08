@@ -36,6 +36,17 @@ const fetchProduct =
         data.images?.[0]
       );
 
+      if (
+  data.colors &&
+  data.colors.length > 0
+) {
+
+  setSelectedColor(
+    data.colors[0]
+  );
+
+}
+
     } catch (error) {
 
       console.log(error);
@@ -49,6 +60,7 @@ const fetchProduct =
   setSelectedImage] =
   useState("");
 const [quantity, setQuantity] = useState(1);
+const [selectedColor, setSelectedColor] = useState("");
 const { addToCart } = useContext(CartContext);
 console.log("Product:", product);
 console.log("ID:", id);
@@ -112,24 +124,43 @@ console.log("ID:", id);
 
   <div className="color-section">
 
-    <h4>Available Colors:</h4>
+    <h4>
+      Available Colors:
+    </h4>
 
     <div className="color-list">
 
       {product.colors.map(
         (color, index) => (
 
-          <span
+          <button
             key={index}
-            className="color-tag"
+            className={`color-tag ${
+              selectedColor === color
+                ? "selected-color"
+                : ""
+            }`}
+            onClick={() =>
+              setSelectedColor(
+                color
+              )
+            }
           >
             {color}
-          </span>
+          </button>
 
         )
       )}
 
     </div>
+
+    <p>
+      Selected:
+      {" "}
+      <strong>
+        {selectedColor}
+      </strong>
+    </p>
 
   </div>
 
@@ -177,7 +208,13 @@ console.log("ID:", id);
   onClick={() => {
   console.log("ADD TO CART CLICKED");
   console.log(product);
-  addToCart(product, quantity);
+  addToCart(
+  {
+    ...product,
+    selectedColor,
+  },
+  quantity
+);
 }}
 >
   Add To Cart
@@ -190,9 +227,10 @@ console.log("ID:", id);
     localStorage.setItem(
       "buyNowProduct",
       JSON.stringify({
-        ...product,
-        quantity,
-      })
+  ...product,
+  quantity,
+  selectedColor,
+})
     );
 
     navigate("/checkout");
