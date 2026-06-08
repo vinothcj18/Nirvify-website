@@ -113,7 +113,34 @@ const categories = [
                 src={product.images[0]}
                 alt={product.name}
               />
+              <p className="rating">
 
+  {product.averageRating > 0 ? (
+
+    <>
+      {"⭐".repeat(
+        Math.round(
+          product.averageRating
+        )
+      )}
+
+      {" "}
+      {product.averageRating}
+
+      {" "}
+
+      ({product.reviewCount}
+      {" "}
+      Reviews)
+    </>
+
+  ) : (
+
+    "Rating: Not Rated Yet"
+
+  )}
+
+</p>
               <h3>{product.name}</h3>
 
               <p>{product.price}</p>

@@ -248,10 +248,33 @@ const submitReview =
 )}
 
           <p className="rating">
-            {product.averageRating > 0
-              ? `⭐ ${product.averageRating} (${product.reviewCount} Reviews)`
-              : "Rating: Not Rated Yet"}
-          </p>
+
+  {product.averageRating > 0 ? (
+
+    <>
+      {"⭐".repeat(
+        Math.round(
+          product.averageRating
+        )
+      )}
+
+      {" "}
+      {product.averageRating}
+
+      {" "}
+
+      ({product.reviewCount}
+      {" "}
+      Reviews)
+    </>
+
+  ) : (
+
+    "Rating: Not Rated Yet"
+
+  )}
+
+</p>
 
           <div className="quantity-section">
 
