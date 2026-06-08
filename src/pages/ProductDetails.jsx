@@ -348,16 +348,17 @@ const submitReview =
     Write A Review
   </h2>
 
-  <select
-    value={rating}
-    onChange={(e) =>
-      setRating(
-        Number(
-          e.target.value
-        )
+ <select
+  className="review-rating"
+  value={rating}
+  onChange={(e) =>
+    setRating(
+      Number(
+        e.target.value
       )
-    }
-  >
+    )
+  }
+>
 
     <option value="5">
       ⭐⭐⭐⭐⭐
@@ -385,6 +386,7 @@ const submitReview =
   <br />
 
   <textarea
+  className="review-textarea"
     rows="4"
     placeholder="Write your review..."
     value={comment}
@@ -399,8 +401,9 @@ const submitReview =
   <br />
 
   <button
-    onClick={submitReview}
-  >
+  className="review-submit-btn"
+  onClick={submitReview}
+>
     Submit Review
   </button>
 
