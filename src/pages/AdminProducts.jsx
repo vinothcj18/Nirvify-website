@@ -12,12 +12,14 @@ function AdminProducts() {
   useState(null);
 const [message, setMessage] =
   useState("");
+const [selectedFiles, setSelectedFiles] =
+  useState([]);
+
 const [formData, setFormData] =
   useState({
       name: "",
       price: "",
       category: "",
-      image: "",
       colors: "",
       description: "",
     });
@@ -123,84 +125,86 @@ const editProduct = (
 
       try {
 
+        const data =
+  new FormData();
+
+data.append(
+  "name",
+  formData.name
+);
+
+data.append(
+  "price",
+  formData.price
+);
+
+data.append(
+  "category",
+  formData.category
+);
+
+data.append(
+  "colors",
+  JSON.stringify(
+    formData.colors
+      ? formData.colors
+          .split(",")
+          .map((color) =>
+            color.trim()
+          )
+      : []
+  )
+);
+
+data.append(
+  "description",
+  JSON.stringify(
+    formData.description
+      .split("|")
+      .map((item) =>
+        item.trim()
+      )
+  )
+);
+
+for (
+  let i = 0;
+  i < selectedFiles.length;
+  i++
+) {
+
+  data.append(
+    "images",
+    selectedFiles[i]
+  );
+
+}
+
        if (editingId) {
 
   await axios.put(
-    `https://nirvify-backend.onrender.com/api/products/${editingId}`,
-    {
-      name:
-        formData.name,
-
-      price:
-        Number(
-          formData.price
-        ),
-
-      category:
-        formData.category,
-
-      images:
-  formData.image
-    .split(",")
-    .map((img) =>
-      img.trim()
-    ),
-    colors:
-  formData.colors
-    ? formData.colors
-        .split(",")
-        .map((color) =>
-          color.trim()
-        )
-    : [],
-
-      description:
-        formData.description
-          .split("|")
-          .map((item) =>
-            item.trim()
-          ),
-      }
-    );
+  `https://nirvify-backend.onrender.com/api/products/${editingId}`,
+  data,
+  {
+    headers: {
+      "Content-Type":
+        "multipart/form-data",
+    },
+  }
+);
 
 } else {
 
   await axios.post(
-    "https://nirvify-backend.onrender.com/api/products",
-    {
-      name:
-        formData.name,
-
-      price:
-        Number(
-          formData.price
-        ),
-
-      category:
-        formData.category,
-
-      images:
-  formData.image
-    .split(",")
-    .map((img) =>
-      img.trim()
-    ),
-colors:
-  formData.colors
-    ? formData.colors
-        .split(",")
-        .map((color) =>
-          color.trim()
-        )
-    : [],
-      description:
-        formData.description
-          .split("|")
-          .map((item) =>
-            item.trim()
-          ),
-    }
-  );
+  "https://nirvify-backend.onrender.com/api/products",
+  data,
+  {
+    headers: {
+      "Content-Type":
+        "multipart/form-data",
+    },
+  }
+);
 
 }
 
@@ -219,7 +223,6 @@ setTimeout(() => {
           name: "",
           price: "",
           category: "",
-          image: "",
           colors:"",
           description: "",
         });
@@ -306,16 +309,15 @@ setTimeout(() => {
           <br />
 
           <input
-            type="text"
-            name="image"
-           placeholder="Enter image paths separated by commas"
-            value={
-              formData.image
-            }
-            onChange={
-              handleChange
-            }
-          />
+  type="file"
+  multiple
+  accept="image/*"
+  onChange={(e) =>
+    setSelectedFiles(
+      e.target.files
+    )
+  }
+/>
 
           <br />
           <br />

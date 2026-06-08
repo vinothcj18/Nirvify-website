@@ -32,10 +32,40 @@ const createProduct = async (
 
   try {
 
-    const product =
-      await Product.create(
-        req.body
+    const imageUrls =
+      req.files.map(
+        (file) =>
+          file.path
       );
+
+    const product =
+      await Product.create({
+        name:
+          req.body.name,
+
+        price:
+          req.body.price,
+
+        category:
+          req.body.category,
+
+        colors:
+          req.body.colors
+            ? JSON.parse(
+                req.body.colors
+              )
+            : [],
+
+        description:
+          req.body.description
+            ? JSON.parse(
+                req.body.description
+              )
+            : [],
+
+        images:
+          imageUrls,
+      });
 
     res.status(201).json(
       product
@@ -44,7 +74,8 @@ const createProduct = async (
   } catch (error) {
 
     res.status(500).json({
-      message: error.message,
+      message:
+        error.message,
     });
 
   }
@@ -83,10 +114,54 @@ const updateProduct = async (
 
   try {
 
+    let imageUrls = [];
+
+    if (
+      req.files &&
+      req.files.length > 0
+    ) {
+
+      imageUrls =
+        req.files.map(
+          (file) =>
+            file.path
+        );
+
+    }
+
     const updatedProduct =
       await Product.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        {
+          name:
+            req.body.name,
+
+          price:
+            req.body.price,
+
+          category:
+            req.body.category,
+
+          colors:
+            req.body.colors
+              ? JSON.parse(
+                  req.body.colors
+                )
+              : [],
+
+          description:
+            req.body.description
+              ? JSON.parse(
+                  req.body.description
+                )
+              : [],
+
+          ...(imageUrls.length >
+            0 && {
+            images:
+              imageUrls,
+          }),
+        },
         {
           new: true,
         }
@@ -99,7 +174,8 @@ const updateProduct = async (
   } catch (error) {
 
     res.status(500).json({
-      message: error.message,
+      message:
+        error.message,
     });
 
   }
