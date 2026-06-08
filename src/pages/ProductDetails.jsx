@@ -11,10 +11,13 @@ import "../styles/ProductDetails.css";
 function ProductDetails() {
   const { id } = useParams();
 const navigate = useNavigate();
+const [reviews, setReviews] =useState([]);
+const [rating, setRating] =useState(5);
+const [comment, setComment] =useState("");
 useEffect(() => {
 
   fetchProduct();
-
+  fetchReviews();
 }, [id]);
 
 const fetchProduct =
@@ -54,16 +57,94 @@ const fetchProduct =
     }
 
   };
-  const [product, setProduct] =
-  useState(null);
-  const [selectedImage,
-  setSelectedImage] =
-  useState("");
+
+  
+  const [product, setProduct] =useState(null);
+  const [selectedImage,setSelectedImage] =useState("");
 const [quantity, setQuantity] = useState(1);
 const [selectedColor, setSelectedColor] = useState("");
 const { addToCart } = useContext(CartContext);
 console.log("Product:", product);
 console.log("ID:", id);
+const fetchReviews =
+  async () => {
+
+    try {
+
+      const response =
+        await fetch(
+          `https://nirvify-backend.onrender.com/api/reviews/${id}`
+        );
+
+      const data =
+        await response.json();
+
+      setReviews(data);
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
+const submitReview =
+  async () => {
+
+    const user =
+      JSON.parse(
+        localStorage.getItem("user")
+      );
+
+    if (!user) {
+
+      alert(
+        "Please login to review."
+      );
+
+      return;
+
+    }
+
+    try {
+
+      await fetch(
+        "https://nirvify-backend.onrender.com/api/reviews",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body: JSON.stringify({
+            productId: id,
+            userName: user.name,
+            rating,
+            comment,
+          }),
+        }
+      );
+
+      alert(
+        "Review submitted successfully"
+      );
+
+      setComment("");
+
+      fetchReviews();
+      fetchProduct();
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
   if (!product) {
     return (
       <div>
@@ -261,7 +342,114 @@ console.log("ID:", id);
         </ul>
 
       </section>
+          <section className="review-section">
 
+  <h2>
+    Write A Review
+  </h2>
+
+  <select
+    value={rating}
+    onChange={(e) =>
+      setRating(
+        Number(
+          e.target.value
+        )
+      )
+    }
+  >
+
+    <option value="5">
+      ⭐⭐⭐⭐⭐
+    </option>
+
+    <option value="4">
+      ⭐⭐⭐⭐
+    </option>
+
+    <option value="3">
+      ⭐⭐⭐
+    </option>
+
+    <option value="2">
+      ⭐⭐
+    </option>
+
+    <option value="1">
+      ⭐
+    </option>
+
+  </select>
+
+  <br />
+  <br />
+
+  <textarea
+    rows="4"
+    placeholder="Write your review..."
+    value={comment}
+    onChange={(e) =>
+      setComment(
+        e.target.value
+      )
+    }
+  />
+
+  <br />
+  <br />
+
+  <button
+    onClick={submitReview}
+  >
+    Submit Review
+  </button>
+
+</section>
+
+<section className="review-list">
+
+  <h2>
+    Customer Reviews
+  </h2>
+
+  {reviews.length === 0 ? (
+
+    <p>
+      No Reviews Yet
+    </p>
+
+  ) : (
+
+    reviews.map(
+      (review) => (
+
+        <div
+          key={review._id}
+          className="review-card"
+        >
+
+          <h4>
+            {review.userName}
+          </h4>
+
+          <p>
+            {"⭐".repeat(
+              review.rating
+            )}
+          </p>
+
+          <p>
+            {review.comment}
+          </p>
+
+        </div>
+
+      )
+    )
+
+  )}
+
+</section>
       <Footer />
     </div>
   );
