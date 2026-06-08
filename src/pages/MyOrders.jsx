@@ -82,16 +82,26 @@ if (!user) {
 
                   <div key={index}>
 
-                    <h3>
-                      {product.name}
-                    </h3>
+  <h3>
+    {product.name}
+  </h3>
 
-                    <p>
-                      Quantity:
-                      {product.quantity}
-                    </p>
+  <p>
+    Quantity:
+    {product.quantity}
+  </p>
 
-                  </div>
+  {product.selectedColor && (
+
+    <p>
+      Color:
+      {" "}
+      {product.selectedColor}
+    </p>
+
+  )}
+
+</div>
 
                 )
               )}

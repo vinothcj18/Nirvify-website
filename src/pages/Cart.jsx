@@ -54,6 +54,15 @@ const navigate = useNavigate();
                   <p>
                     Quantity: {item.quantity}
                   </p>
+                  {item.selectedColor && (
+
+  <p>
+    Color:
+    {" "}
+    {item.selectedColor}
+  </p>
+
+)}
 
                   <p>
                     Subtotal:

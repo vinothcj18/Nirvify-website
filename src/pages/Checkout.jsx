@@ -47,19 +47,33 @@ const checkoutItems =
           {checkoutItems.map((item) => (
 
             <div
-              key={item.id}
-              className="checkout-item"
-            >
+  key={item._id || item.id}
+  className="checkout-item"
+>
 
-              <p>{item.name}</p>
+  <p>
+    <strong>
+      {item.name}
+    </strong>
+  </p>
 
-              <p>
-                ₹{item.price}
-                ×
-                {item.quantity}
-              </p>
+  {item.selectedColor && (
 
-            </div>
+    <p>
+      Color:
+      {" "}
+      {item.selectedColor}
+    </p>
+
+  )}
+
+  <p>
+    ₹{item.price}
+    ×
+    {item.quantity}
+  </p>
+
+</div>
 
           ))}
 

@@ -136,10 +136,18 @@ const updateStatus = async (
         (product, index) => (
 
           <li key={index}>
-            {product.name}
-            {" "}x{" "}
-            {product.quantity}
-          </li>
+  {product.name}
+  {" "}x{" "}
+  {product.quantity}
+
+  {product.selectedColor && (
+    <>
+      {" "}
+      - Color:
+      {product.selectedColor}
+    </>
+  )}
+</li>
 
         )
       )}
