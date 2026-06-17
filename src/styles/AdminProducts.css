@@ -122,3 +122,34 @@
 
   font-weight: 600;
 }
+.keep-images-container {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 15px 0;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+}
+
+.keep-images-container input[type="checkbox"] {
+
+  width: 18px;
+
+  height: 18px;
+
+  cursor: pointer;
+
+}
+
+.keep-images-container span {
+
+  color: #333;
+
+}

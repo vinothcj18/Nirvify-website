@@ -332,28 +332,23 @@ setTimeout(() => {
 
 {editingId && (
 
-  <div>
+  <div className="keep-images-container">
 
-    <label>
+  <input
+    type="checkbox"
+    checked={keepExistingImages}
+    onChange={(e) =>
+      setKeepExistingImages(
+        e.target.checked
+      )
+    }
+  />
 
-      <input
-        type="checkbox"
-        checked={
-          keepExistingImages
-        }
-        onChange={(e) =>
-          setKeepExistingImages(
-            e.target.checked
-          )
-        }
-      />
+  <span>
+    Keep Existing Images
+  </span>
 
-      {" "}
-      Keep Existing Images
-
-    </label>
-
-  </div>
+</div>
 
 )}
 
