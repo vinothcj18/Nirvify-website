@@ -114,6 +114,11 @@ const updateProduct = async (
 
   try {
 
+    const existingProduct =
+      await Product.findById(
+        req.params.id
+      );
+
     let imageUrls = [];
 
     if (
@@ -126,6 +131,30 @@ const updateProduct = async (
           (file) =>
             file.path
         );
+
+    }
+
+    const keepExistingImages =
+      req.body.keepExistingImages ===
+      "true";
+
+    let finalImages = [];
+
+    if (
+      keepExistingImages
+    ) {
+
+      finalImages = [
+        ...existingProduct.images,
+        ...imageUrls,
+      ];
+
+    } else {
+
+      finalImages =
+        imageUrls.length > 0
+          ? imageUrls
+          : existingProduct.images;
 
     }
 
@@ -156,11 +185,8 @@ const updateProduct = async (
                 )
               : [],
 
-          ...(imageUrls.length >
-            0 && {
-            images:
-              imageUrls,
-          }),
+          images:
+            finalImages,
         },
         {
           new: true,

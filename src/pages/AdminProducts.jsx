@@ -14,6 +14,11 @@ const [message, setMessage] =
   useState("");
 const [selectedFiles, setSelectedFiles] =
   useState([]);
+const [
+  keepExistingImages,
+  setKeepExistingImages
+] = useState(true);
+
 
 const [formData, setFormData] =
   useState({
@@ -166,7 +171,10 @@ data.append(
       )
   )
 );
-
+data.append(
+  "keepExistingImages",
+  keepExistingImages
+);
 for (
   let i = 0;
   i < selectedFiles.length;
@@ -319,12 +327,43 @@ setTimeout(() => {
   }
 />
 
-          <br />
-          <br />
-        <input
+<br />
+<br />
+
+{editingId && (
+
+  <div>
+
+    <label>
+
+      <input
+        type="checkbox"
+        checked={
+          keepExistingImages
+        }
+        onChange={(e) =>
+          setKeepExistingImages(
+            e.target.checked
+          )
+        }
+      />
+
+      {" "}
+      Keep Existing Images
+
+    </label>
+
+  </div>
+
+)}
+
+<br />
+<br />
+
+<input
   type="text"
   name="colors"
-  placeholder="Available Colors (Optional) - Red, Blue, Green"
+  placeholder="Available Colors (Optional)"
   value={
     formData.colors
   }
