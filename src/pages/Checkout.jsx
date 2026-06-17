@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext,useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CartContext } from "../context/CartContext";
@@ -23,6 +23,18 @@ const checkoutItems =
 
   const user = JSON.parse(
     localStorage.getItem("user")
+  );
+
+  const [isEditingAddress,
+  setIsEditingAddress] =
+  useState(false);
+
+const [deliveryAddress,
+  setDeliveryAddress] =
+  useState(
+    localStorage.getItem(
+      "deliveryAddress"
+    ) || user?.address || ""
   );
 
   const totalAmount = checkoutItems.reduce(
@@ -97,18 +109,87 @@ const checkoutItems =
             {user?.phone}
           </p>
 
-          <p>
-            <strong>Address:</strong>
-            {" "}
-            {user?.address}
-          </p>
+          <div>
+
+  <p>
+    <strong>
+      Delivery Address:
+    </strong>
+  </p>
+
+  {isEditingAddress ? (
+
+    <textarea
+      rows="4"
+      value={
+        deliveryAddress
+      }
+      onChange={(e) =>
+        setDeliveryAddress(
+          e.target.value
+        )
+      }
+      style={{
+        width: "100%",
+        padding: "10px",
+        marginTop: "10px",
+      }}
+    />
+
+  ) : (
+
+    <p>
+      {deliveryAddress}
+    </p>
+
+  )}
+
+  <button
+    type="button"
+    onClick={() => {
+
+      if (
+        isEditingAddress
+      ) {
+
+        localStorage.setItem(
+          "deliveryAddress",
+          deliveryAddress
+        );
+
+      }
+
+      setIsEditingAddress(
+        !isEditingAddress
+      );
+
+    }}
+    style={{
+      marginTop: "10px",
+    }}
+  >
+    {
+      isEditingAddress
+        ? "Save Address"
+        : "Change Address"
+    }
+  </button>
+
+</div>
 
           <button
-            className="payment-btn"
-            onClick={() =>
-              navigate("/payment")
-            }
-          >
+  className="payment-btn"
+  onClick={() => {
+
+    localStorage.setItem(
+      "deliveryAddress",
+      deliveryAddress
+    );
+
+    navigate("/payment");
+
+  }}
+>
             Proceed To Payment
           </button>
 
