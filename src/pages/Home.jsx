@@ -37,7 +37,7 @@ const fetchProducts =
   };
 
   return (
-    <div classname="home-page">
+    <div className="home-page">
       <Navbar />
 
       <section className="hero">
