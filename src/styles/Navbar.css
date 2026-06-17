@@ -30,17 +30,37 @@
 
   .navbar {
 
-    padding: 15px 20px;
+  display: flex;
 
-    position: relative;
+  flex-direction: row;
 
-  }
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 15px 20px;
+
+  position: relative;
+
+}
 
   .menu-btn {
 
-    display: block;
+  display: none;
 
-  }
+  border: none;
+
+  background: none;
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  color: #5c4033;
+
+}
 
   .nav-links {
 
