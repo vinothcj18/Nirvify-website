@@ -9,6 +9,12 @@ function AdminOrders() {
   const [orders, setOrders] =
     useState([]);
 
+  const [searchTerm, setSearchTerm] =
+  useState("");
+
+const [sortOption, setSortOption] =
+  useState("All Orders");  
+
   const user = JSON.parse(
     localStorage.getItem("user")
   );
@@ -80,6 +86,116 @@ const updateStatus = async (
 
 };
 
+const filteredOrders =
+  orders
+    .filter((order) => {
+
+      const search =
+        searchTerm.toLowerCase();
+
+      const matchesSearch =
+
+        order.customerName
+          .toLowerCase()
+          .includes(search) ||
+
+        order.email
+          .toLowerCase()
+          .includes(search) ||
+
+        order.phone
+          .includes(search);
+
+      let matchesSort = true;
+
+      if (
+        sortOption ===
+        "Pending Orders"
+      ) {
+
+        matchesSort =
+          order.orderStatus ===
+          "Pending";
+
+      }
+
+      if (
+        sortOption ===
+        "Approved Orders"
+      ) {
+
+        matchesSort =
+          order.orderStatus ===
+          "Approved";
+
+      }
+
+      if (
+        sortOption ===
+        "Delivered Orders"
+      ) {
+
+        matchesSort =
+          order.orderStatus ===
+          "Delivered";
+
+      }
+
+      if (
+        sortOption ===
+        "Cancelled Orders"
+      ) {
+
+        matchesSort =
+          order.orderStatus ===
+          "Cancelled";
+
+      }
+
+      return (
+        matchesSearch &&
+        matchesSort
+      );
+
+    })
+    .sort((a, b) => {
+
+      if (
+        sortOption ===
+        "Newest First"
+      ) {
+
+        return (
+          new Date(
+            b.createdAt
+          ) -
+          new Date(
+            a.createdAt
+          )
+        );
+
+      }
+
+      if (
+        sortOption ===
+        "Oldest First"
+      ) {
+
+        return (
+          new Date(
+            a.createdAt
+          ) -
+          new Date(
+            b.createdAt
+          )
+        );
+
+      }
+
+      return 0;
+
+    });
+
   return (
     <div>
 
@@ -91,13 +207,67 @@ const updateStatus = async (
           Customer Orders
         </h1>
 
+        <div className="admin-controls">
+
+  <input
+    type="text"
+    placeholder="Search Customer..."
+    value={searchTerm}
+    onChange={(e) =>
+      setSearchTerm(
+        e.target.value
+      )
+    }
+  />
+
+  <select
+    value={sortOption}
+    onChange={(e) =>
+      setSortOption(
+        e.target.value
+      )
+    }
+  >
+
+    <option>
+      All Orders
+    </option>
+
+    <option>
+      Pending Orders
+    </option>
+
+    <option>
+      Approved Orders
+    </option>
+
+    <option>
+      Delivered Orders
+    </option>
+
+    <option>
+      Cancelled Orders
+    </option>
+
+    <option>
+      Newest First
+    </option>
+
+    <option>
+      Oldest First
+    </option>
+
+  </select>
+
+</div>
+
         {orders.length === 0 ? (
 
           <p>No Orders Found</p>
 
         ) : (
 
-          orders.map((order) => (
+          filteredOrders.map((order) => (
 
   <div
     key={order._id}

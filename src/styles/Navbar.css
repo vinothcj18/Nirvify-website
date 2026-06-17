@@ -3,12 +3,31 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
-  background-color: #fff4f4;
+  background-color: #d2f0f8;
 }
 
 .logo {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
   font-size: 28px;
+
   color: #5c4033;
+
+}
+
+.logo-img {
+
+  width: 45px;
+
+  height: 45px;
+
+  object-fit: contain;
+
 }
 
 .nav-links {
@@ -102,9 +121,11 @@
 
   }
 
-  .logo {
+   .logo-img {
 
-    font-size: 24px;
+    width: 35px;
+
+    height: 35px;
 
   }
   

@@ -24,7 +24,17 @@ const [menuOpen,setMenuOpen] =useState(false);
   return (
     <nav className="navbar">
 
-      <h2 className="logo">Nirvify</h2>
+      <h2 className="logo">
+
+  <img
+    src="https://res.cloudinary.com/dkh6ayavi/image/upload/q_auto/f_auto/v1781715761/476328888_1164835108708256_814700794095948952_n-removebg-preview_d1t4wk.png"
+    alt="Nirvify Logo"
+    className="logo-img"
+  />
+
+  Nirvify
+
+</h2>
       <button
   className="menu-btn"
   onClick={() =>
