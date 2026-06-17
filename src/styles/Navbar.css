@@ -26,13 +26,48 @@
 .nav-links a:hover {
   color: #ff8fa3;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 
   .navbar {
+
+    padding: 15px 20px;
+
+    position: relative;
+
+  }
+
+  .menu-btn {
+
+    display: block;
+
+  }
+
+  .nav-links {
+
+    display: none;
+
     flex-direction: column;
+
+    width: 100%;
+
+    text-align: center;
+
     gap: 15px;
 
-    padding: 20px;
+    margin-top: 15px;
+
+  }
+
+  .nav-links.active {
+
+    display: flex;
+
+  }
+
+  .logo {
+
+    font-size: 24px;
+
   }
 
 }
@@ -55,4 +90,19 @@
   font-family: inherit;
 
   color: #6b4a3a;
+}
+.menu-btn {
+
+  display: none;
+
+  border: none;
+
+  background: none;
+
+  font-size: 28px;
+
+  cursor: pointer;
+
+  color: #5c4033;
+
 }

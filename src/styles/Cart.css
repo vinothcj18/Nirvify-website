@@ -1,6 +1,21 @@
 .cart-page {
   padding: 50px;
   min-height: 80vh;
+
+
+  background-image:
+    url("https://res.cloudinary.com/dkh6ayavi/image/upload/v1781702789/download_1_ug1deq.jpg");
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+
+
+
 }
 
 .cart-page h1 {

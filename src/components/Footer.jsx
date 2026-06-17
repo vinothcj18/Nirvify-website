@@ -8,7 +8,7 @@ function Footer() {
       <p>Handcrafted creations made with love.</p>
 
       <div className="footer-contact">
-        <p>📞 +91 XXXXX XXXXX</p>
+        <p>📞 +91 9043498082</p>
         <p>📧 nirvify@gmail.com</p>
         <p>📍 Tamil Nadu, India</p>
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext,useState } from "react";
 
 import { CartContext } from "../context/CartContext";
 
@@ -12,7 +12,7 @@ function Navbar() {
   const user = JSON.parse(
     localStorage.getItem("user")
   );
-
+const [menuOpen,setMenuOpen] =useState(false);
   
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -25,8 +25,24 @@ function Navbar() {
     <nav className="navbar">
 
       <h2 className="logo">Nirvify</h2>
+      <button
+  className="menu-btn"
+  onClick={() =>
+    setMenuOpen(
+      !menuOpen
+    )
+  }
+>
+  ☰
+</button>
 
-      <div className="nav-links">
+      <div
+  className={`nav-links ${
+    menuOpen
+      ? "active"
+      : ""
+  }`}
+>
 
   <Link to="/">Home</Link>
 
