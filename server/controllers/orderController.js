@@ -126,9 +126,69 @@ const getUserOrders = async (
   }
 
 };
+
+const cancelOrder = async (
+  req,
+  res
+) => {
+
+  try {
+
+    const order =
+      await Order.findById(
+        req.params.id
+      );
+
+    if (!order) {
+
+      return res
+        .status(404)
+        .json({
+          message:
+            "Order not found",
+        });
+
+    }
+
+    if (
+      order.orderStatus !==
+      "Pending"
+    ) {
+
+      return res
+        .status(400)
+        .json({
+          message:
+            "This order can no longer be cancelled",
+        });
+
+    }
+
+    order.orderStatus =
+      "Cancelled";
+
+    await order.save();
+
+    res.status(200).json({
+      message:
+        "Order cancelled successfully",
+      order,
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message:
+        error.message,
+    });
+
+  }
+
+};
 module.exports = {
   createOrder,
   getAllOrders,
   updateOrderStatus,
   getUserOrders,
+  cancelOrder,
 };

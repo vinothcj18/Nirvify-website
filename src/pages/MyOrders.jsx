@@ -54,6 +54,36 @@ if (!user) {
     }
 
   };
+  const cancelOrder = async (
+  orderId
+) => {
+
+  const confirmCancel =
+    window.confirm(
+      "Are you sure you want to cancel this order?"
+    );
+
+  if (!confirmCancel)
+    return;
+
+  try {
+
+    await axios.patch(
+      `https://nirvify-backend.onrender.com/api/orders/${orderId}/cancel`
+    );
+
+    fetchOrders();
+
+  } catch (error) {
+
+    alert(
+      error.response?.data?.message ||
+      "Unable to cancel order"
+    );
+
+  }
+
+};
 
   return (
     <div>
@@ -120,6 +150,34 @@ if (!user) {
     order.createdAt
   ).toLocaleDateString("en-IN")}
 </p>
+
+{order.orderStatus ===
+  "Pending" && (
+
+  <button
+    className="cancel-order-btn"
+    onClick={() =>
+      cancelOrder(
+        order._id
+      )
+    }
+  >
+    Cancel Order
+  </button>
+
+)}
+
+{order.orderStatus ===
+  "Approved" && (
+
+  <p className="approved-msg">
+
+    ⚠ This order has been approved
+    and can no longer be cancelled.
+
+  </p>
+
+)}
             </div>
 
           ))

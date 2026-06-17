@@ -46,7 +46,13 @@
 
   .menu-btn {
 
-  display: none;
+  display: block !important;
+
+  position: absolute;
+
+  right: 20px;
+
+  top: 18px;
 
   border: none;
 
@@ -60,23 +66,35 @@
 
   color: #5c4033;
 
+  z-index: 9999;
+
 }
 
   .nav-links {
 
-    display: none;
+  display: none;
 
-    flex-direction: column;
+  position: absolute;
 
-    width: 100%;
+  top: 70px;
 
-    text-align: center;
+  left: 0;
 
-    gap: 15px;
+  width: 100%;
 
-    margin-top: 15px;
+  background: #fff4f4;
 
-  }
+  flex-direction: column;
+
+  text-align: center;
+
+  gap: 15px;
+
+  padding: 20px 0;
+
+  z-index: 1000;
+
+}
 
   .nav-links.active {
 
@@ -89,6 +107,7 @@
     font-size: 24px;
 
   }
+  
 
 }
 .logout-btn {

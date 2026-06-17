@@ -5,7 +5,8 @@ const {
   createOrder,
   getAllOrders,
   updateOrderStatus,
-  getUserOrders
+  getUserOrders,
+  cancelOrder,
 } = require("../controllers/orderController");
 
 const router = express.Router();
@@ -54,6 +55,11 @@ router.get("/", getAllOrders);
 router.put(
   "/:id",
   updateOrderStatus
+);
+
+router.patch(
+  "/:id/cancel",
+  cancelOrder
 );
 
 router.post(
