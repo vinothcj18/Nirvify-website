@@ -26,7 +26,10 @@ const orderItems =
 const user = JSON.parse(
   localStorage.getItem("user")
 );
-
+const deliveryAddress =
+  localStorage.getItem(
+    "deliveryAddress"
+  ) || user.address;
 
 
 const totalAmount = orderItems?.reduce(
@@ -66,9 +69,9 @@ const totalAmount = orderItems?.reduce(
     );
 
     formData.append(
-      "address",
-      user.address
-    );
+  "address",
+  deliveryAddress
+);
 
     formData.append(
       "products",
@@ -126,7 +129,18 @@ const totalAmount = orderItems?.reduce(
             Complete the payment and upload
             the screenshot below.
           </p>
+          <p
+  style={{
+    marginTop: "15px",
+    fontWeight: "600",
+  }}
+>
+  Deliver To:
+</p>
 
+<p>
+  {deliveryAddress}
+</p>
           <input
             type="file"
             accept="image/*"
@@ -168,6 +182,10 @@ const totalAmount = orderItems?.reduce(
 
 localStorage.removeItem(
   "buyNowProduct"
+);
+
+localStorage.removeItem(
+  "deliveryAddress"
 );
 
 navigate("/");}}

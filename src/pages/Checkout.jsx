@@ -145,29 +145,27 @@ const [deliveryAddress,
   )}
 
   <button
-    type="button"
-    onClick={() => {
+  type="button"
+  className="change-address-btn"
+  onClick={() => {
 
-      if (
-        isEditingAddress
-      ) {
+    if (
+      isEditingAddress
+    ) {
 
-        localStorage.setItem(
-          "deliveryAddress",
-          deliveryAddress
-        );
-
-      }
-
-      setIsEditingAddress(
-        !isEditingAddress
+      localStorage.setItem(
+        "deliveryAddress",
+        deliveryAddress
       );
 
-    }}
-    style={{
-      marginTop: "10px",
-    }}
-  >
+    }
+
+    setIsEditingAddress(
+      !isEditingAddress
+    );
+
+  }}
+>
     {
       isEditingAddress
         ? "Save Address"

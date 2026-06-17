@@ -27,3 +27,33 @@
   background-color: #5c4033;
   color: white;
 }
+
+.change-address-btn {
+
+  background: #ff69b4;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  margin-top: 10px;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+
+}
+
+.change-address-btn:hover {
+
+  background: #ff4fa2;
+
+  transform: translateY(-2px);
+
+}
