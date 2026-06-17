@@ -44,6 +44,12 @@ function Navbar() {
 
   {user?.role === "admin" && (
   <>
+    <Link
+  to="/admin/dashboard"
+>
+  Dashboard
+</Link>
+     
     <Link to="/admin-orders">
       Admin Orders
     </Link>

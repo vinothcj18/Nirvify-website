@@ -11,7 +11,7 @@ import Payment from "./pages/Payment";
 import AdminOrders from "./pages/AdminOrders";
 import MyOrders from "./pages/MyOrders";
 import AdminProducts from "./pages/AdminProducts";
-
+import AdminDashboard from "./pages/AdminDashboard";
 function App() {
   return (
     <BrowserRouter>
@@ -28,7 +28,7 @@ function App() {
         <Route path="/admin-orders"element={<AdminOrders />}/>
         <Route path="/my-orders"element={<MyOrders />}/>
         <Route path="/admin-products"element={<AdminProducts />}/>
-
+        <Route path="/admin/dashboard"element={<AdminDashboard /> }/>
       </Routes>
     </BrowserRouter>
   );

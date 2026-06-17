@@ -8,6 +8,11 @@ const productRoutes = require("./routes/productRoutes");
 const authRoutes =require("./routes/authRoutes");
 const app = express();
 const reviewRoutes = require("./routes/reviewRoutes");
+const dashboardRoutes =
+  require(
+    "./routes/dashboardRoutes"
+ );
+
 connectDB();
 
 app.use(cors());
@@ -17,6 +22,7 @@ app.use( "/api/orders",orderRoutes);
 app.use("/api/products", productRoutes);
 app.use( "/api/auth",authRoutes);
 app.use( "/api/reviews",reviewRoutes);
+app.use("/api/dashboard",dashboardRoutes);
 app.get("/", (req, res) => {
   res.send("Nirvify Backend Running");
 });
