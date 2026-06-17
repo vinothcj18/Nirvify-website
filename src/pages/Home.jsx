@@ -2,9 +2,40 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 function Home() {
     const navigate = useNavigate();
+    const [featuredProducts,setFeaturedProducts] =useState([]);
+    
+useEffect(() => {
+
+  fetchProducts();
+
+}, []);
+
+const fetchProducts =
+  async () => {
+
+    try {
+
+      const response =
+        await axios.get(
+          "https://nirvify-backend.onrender.com/api/products"
+        );
+
+      setFeaturedProducts(
+        response.data.slice(0, 3)
+      );
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
   return (
     <div>
       <Navbar />
@@ -43,37 +74,42 @@ function Home() {
 
   <div className="product-container">
 
-    <div className="product-card">
-      <img
-        src="https://via.placeholder.com/250"
-        alt="product"
-      />
+  {featuredProducts.map(
+    (product) => (
 
-      <h3>Explosion Box</h3>
-      <p>₹499</p>
-    </div>
+      <div
+  key={product._id}
+  className="product-card"
+  onClick={() =>
+    navigate(
+      `/product/${product._id}`
+    )
+  }
+>
 
-    <div className="product-card">
-      <img
-        src="https://via.placeholder.com/250"
-        alt="product"
-      />
+        <img
+          src={
+            product.images?.[0]
+          }
+          alt={
+            product.name
+          }
+        />
 
-      <h3>Paper Flower Bouquet</h3>
-      <p>₹299</p>
-    </div>
+        <h3>
+          {product.name}
+        </h3>
 
-    <div className="product-card">
-      <img
-        src="https://via.placeholder.com/250"
-        alt="product"
-      />
+        <p>
+          ₹{product.price}
+        </p>
 
-      <h3>Customized Scrapbook</h3>
-      <p>₹699</p>
-    </div>
+      </div>
 
-  </div>
+    )
+  )}
+
+</div>
 </section>
 
       <Footer />
